@@ -26,11 +26,11 @@ This application must perform the following tasks and built to best practices:
 		- [ ] success
 		- [x] Localization
 6. **Display the results** of all sorts **including the sort direction** and **time taken**. 
-	- [ ] Results displayed
+	- [x] Results displayed
 		- [x] sequence
 		- [x] direction
 		- [x] time taken
-		- [ ] Pagination
+		- [x] Pagination
 7. Allow the user to **export all of the sorts as JSON**. 
 	- [x] Export option on display page to export all 
 

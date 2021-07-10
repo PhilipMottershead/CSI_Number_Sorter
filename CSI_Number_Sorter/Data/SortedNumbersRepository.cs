@@ -9,22 +9,33 @@ namespace CSI_Number_Sorter.Data
 {
     public class SortedNumbersRepository
     {
-        private readonly SortedNumbersContext context;
+        private readonly SortedNumbersContext _context;
 
         public SortedNumbersRepository(SortedNumbersContext context)
         {
-            this.context = context;
+            this._context = context;
         }
 
         public async Task<List<SortedNumbers>> ToListAsync()
         {
-            return await context.SortedNumbers.ToListAsync();
+            return await _context.SortedNumbers.ToListAsync();
         }
 
         public async Task AddAsync(SortedNumbers sortedNumbers)
         {
-            context.Add(sortedNumbers);
-            await context.SaveChangesAsync();
+            _context.Add(sortedNumbers);
+            await _context.SaveChangesAsync();
         }
+
+        public DbSet<SortedNumbers> SortedNumbers()
+        {
+            return _context.SortedNumbers;
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await _context.SortedNumbers.CountAsync();
+        }
+
     }
 }

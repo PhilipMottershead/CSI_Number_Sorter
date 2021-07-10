@@ -1,44 +1,62 @@
-﻿@model IEnumerable<CSI_Number_Sorter.Models.SortedNumbers>
-@using Microsoft.AspNetCore.Mvc.Localization
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@model CSI_Number_Sorter.Models.PaginatedList<CSI_Number_Sorter.Models.SortedNumbers>
 @inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = Localizer["Title"];
 }
+<div class="inner cover text-center">
 
-<h1> @Localizer["Headline"]</h1>
+    <h1> @Localizer["Headline"]</h1>
 
-<p>
-    <a asp-action="Create">@Localizer["CreateLable"]</a> <a asp-action="Export">@Localizer["ExportLabel"]</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Numbers)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SortOrder)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TimeTaken)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <p>
+        <a class="btn btn-primary" asp-action="Create">@Localizer["CreateLable"]</a> <a class="btn btn-primary" asp-action="Export">@Localizer["ExportLabel"]</a>
+    </p>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Numbers)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SortOrder)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TimeTaken)
-                </td>
+                <th>
+                    @Localizer["Numbers"]
+                </th>
+                <th>
+                    @Localizer["SortOrder"]
+                </th>
+                <th>
+                    @Localizer["TimeTaken"]
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Numbers)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SortOrder)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimeTaken)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <a asp-action="Index"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+       class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+    <a asp-action="Index"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+       class="btn btn-default @nextDisabled">
+        Next
+    </a>
+</div>

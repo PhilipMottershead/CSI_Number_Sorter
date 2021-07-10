@@ -14,6 +14,6 @@ namespace CSI_Number_Sorter.Data
         {
         }
 
-        public DbSet<SortedNumbers> SortedNumbers { get; set; }
+        public DbSet<CSI_Number_Sorter.Models.SortedNumbers> SortedNumbers { get; set; }
     }
 }
