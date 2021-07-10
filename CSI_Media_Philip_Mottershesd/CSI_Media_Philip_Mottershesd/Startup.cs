@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using CSI_Media_Philip_Mottershesd.Data;
 using Microsoft.AspNetCore.Mvc.Razor;
 
+
 namespace CSI_Media_Philip_Mottershesd
 {
     public class Startup
@@ -32,7 +33,10 @@ namespace CSI_Media_Philip_Mottershesd
 
             services.AddMvc()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization();
+                 .AddDataAnnotationsLocalization(options => {
+                     options.DataAnnotationLocalizerProvider = (type, factory) =>
+                         factory.Create(typeof(SharedResource));
+                 });
             services.AddDbContext<SortedNumbersContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SortedNumbersContext")));
         }

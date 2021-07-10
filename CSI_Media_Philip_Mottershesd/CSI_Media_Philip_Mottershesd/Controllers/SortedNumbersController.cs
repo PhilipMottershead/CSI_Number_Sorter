@@ -88,14 +88,7 @@ namespace CSI_Media_Philip_Mottershesd.Controllers
             }
             catch (Exception e)
             {
-                if (e.GetType().FullName == "FormatException")
-                {
-                    return Json("format");
-                }
-                else
-                {
-                    return Json("Too long");
-                }
+                return Json(e.Message);
             }
             return Json(true);
         }
