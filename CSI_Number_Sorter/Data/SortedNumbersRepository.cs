@@ -1,11 +1,11 @@
-﻿using CSI_Media_Philip_Mottershesd.Models;
+﻿using CSI_Number_Sorter.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSI_Media_Philip_Mottershesd.Data
+namespace CSI_Number_Sorter.Data
 {
     public class SortedNumbersRepository
     {

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CSI_Media_Philip_Mottershesd.Models.SortedNumbers>
+﻿@model IEnumerable<CSI_Number_Sorter.Models.SortedNumbers>
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @{
@@ -8,7 +8,7 @@
 <h1> @Localizer["Headline"]</h1>
 
 <p>
-    <a asp-action="Create">@Localizer["CreateLable"]</a>
+    <a asp-action="Create">@Localizer["CreateLable"]</a> <a asp-action="Export">@Localizer["ExportLabel"]</a>
 </p>
 <table class="table">
     <thead>

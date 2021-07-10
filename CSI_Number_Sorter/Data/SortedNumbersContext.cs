@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using CSI_Media_Philip_Mottershesd.Models;
+using CSI_Number_Sorter.Models;
 
-namespace CSI_Media_Philip_Mottershesd.Data
+namespace CSI_Number_Sorter.Data
 {
     public class SortedNumbersContext : DbContext
     {

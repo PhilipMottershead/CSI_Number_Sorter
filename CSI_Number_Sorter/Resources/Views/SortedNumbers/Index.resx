@@ -120,6 +120,9 @@
   <data name="CreateLable" xml:space="preserve">
     <value>Create New</value>
   </data>
+  <data name="ExportLabel" xml:space="preserve">
+    <value>Export All</value>
+  </data>
   <data name="Headline" xml:space="preserve">
     <value>Index</value>
   </data>

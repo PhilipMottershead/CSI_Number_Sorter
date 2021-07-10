@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSI_Media_Philip_Mottershesd.Models
+namespace CSI_Number_Sorter.Models
 {
     public class SortedNumbers
     {
@@ -21,6 +21,24 @@ namespace CSI_Media_Philip_Mottershesd.Models
 
         [Display(Name = "TimeTaken", ResourceType = typeof(Resources.Models.SortedNumbers))]
         public TimeSpan TimeTaken { get; set; }
+
+        public void Sort ()
+        {
+            var watch = new System.Diagnostics.Stopwatch();
+
+            watch.Start();
+            var nums = Numbers.Split(",").ToList();
+            var resultsList = new List<int>();
+            nums.ForEach(n => resultsList.Add(int.Parse(n)));
+            resultsList.Sort();
+            if (SortOrder == 1)
+            {
+                resultsList.Reverse();
+            }
+            watch.Stop();
+
+            TimeTaken = watch.Elapsed;
+        }
 
     }
 }

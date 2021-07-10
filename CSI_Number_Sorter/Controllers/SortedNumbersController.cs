@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CSI_Media_Philip_Mottershesd.Data;
-using CSI_Media_Philip_Mottershesd.Models;
+using CSI_Number_Sorter.Data;
+using CSI_Number_Sorter.Models;
 using Microsoft.Extensions.Localization;
+using Newtonsoft.Json;
 
-namespace CSI_Media_Philip_Mottershesd.Controllers
+namespace CSI_Number_Sorter.Controllers
 {
     public class SortedNumbersController : Controller
     {
@@ -26,6 +27,18 @@ namespace CSI_Media_Philip_Mottershesd.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.ToListAsync());
+        }
+
+        public async Task<ActionResult> Export()
+        {
+            var list = await _context.ToListAsync();
+            string strserialize = JsonConvert.SerializeObject(list, Formatting.Indented);
+            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(strserialize);
+            var output = new FileContentResult(bytes, System.Net.Mime.MediaTypeNames.Application.Json)
+            {
+                FileDownloadName = "download.json"
+            };
+            return output;
         }
 
         // GET: SortedNumbers/Create
@@ -48,35 +61,12 @@ namespace CSI_Media_Philip_Mottershesd.Controllers
         {
             if (ModelState.IsValid)
             {
-                sortedNumbers = SortNumbers(sortedNumbers);
+                sortedNumbers.Sort();
                 await _context.AddAsync(sortedNumbers);
                 return RedirectToAction(nameof(Index));
                 
             }
             return View(sortedNumbers);
-        }
-
-        private SortedNumbers SortNumbers(SortedNumbers sortedNumbers) 
-        {
-            var watch = new System.Diagnostics.Stopwatch();
-            var numbers = sortedNumbers.Numbers;
-            var direction = sortedNumbers.SortOrder;
-
-            watch.Start();
-
-            var nums = numbers.Split(",").ToList();
-            var resultsList = new List<int>();
-            nums.ForEach(n => resultsList.Add(int.Parse(n)));
-            resultsList.Sort();
-            if (direction == 1)
-            {
-                resultsList.Reverse();
-            }
-            watch.Stop();
-
-            sortedNumbers.Numbers = string.Join(",",resultsList);
-            sortedNumbers.TimeTaken = watch.Elapsed;
-            return sortedNumbers;
         }
 
         [AcceptVerbs("GET","POST")]

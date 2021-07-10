@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CSI_Media_Philip_Mottershesd.Resources.Models {
+namespace CSI_Number_Sorter.Resources.Models {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CSI_Media_Philip_Mottershesd.Resources.Models {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CSI_Media_Philip_Mottershesd.Resources.Models.SortedNumbers", typeof(SortedNumbers).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CSI_Number_Sorter.Resources.Models.SortedNumbers", typeof(SortedNumbers).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

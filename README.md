@@ -24,7 +24,7 @@ This application must perform the following tasks and built to best practices:
 		- [x] Validation 
 		- [x] errors
 		- [ ] success
-		- [ ] Localization
+		- [x] Localization
 6. **Display the results** of all sorts **including the sort direction** and **time taken**. 
 	- [ ] Results displayed
 		- [x] sequence
@@ -32,7 +32,7 @@ This application must perform the following tasks and built to best practices:
 		- [x] time taken
 		- [ ] Pagination
 7. Allow the user to **export all of the sorts as JSON**. 
-	- [ ] Export option on display page to export all 
+	- [x] Export option on display page to export all 
 
 **Please document all assumptions and decisions taken separately** and submit with final code base.
 
