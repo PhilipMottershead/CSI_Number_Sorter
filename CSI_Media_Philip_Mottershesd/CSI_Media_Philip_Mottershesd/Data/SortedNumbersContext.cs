@@ -14,17 +14,6 @@ namespace CSI_Media_Philip_Mottershesd.Data
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //modelBuilder.Entity<SortedNumbers>()
-            // .Property(e => e.Numbers)
-            // .HasConversion(
-            //     v => string.Join(',', v),
-            //     v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
-        }
-
-
-
-        public DbSet<CSI_Media_Philip_Mottershesd.Models.SortedNumbers> SortedNumbers { get; set; }
+        public DbSet<SortedNumbers> SortedNumbers { get; set; }
     }
 }

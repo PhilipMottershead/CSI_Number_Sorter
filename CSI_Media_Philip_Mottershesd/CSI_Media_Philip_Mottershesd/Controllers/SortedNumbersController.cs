@@ -13,10 +13,10 @@ namespace CSI_Media_Philip_Mottershesd.Controllers
 {
     public class SortedNumbersController : Controller
     {
-        private readonly SortedNumbersContext _context;
+        private readonly SortedNumbersRepository _context;
 
         private readonly IStringLocalizer<SortedNumbersController> _localizer;
-        public SortedNumbersController(SortedNumbersContext context, IStringLocalizer<SortedNumbersController> localizer)
+        public SortedNumbersController(SortedNumbersRepository context, IStringLocalizer<SortedNumbersController> localizer)
         {
             _context = context;
             _localizer = localizer;
@@ -25,25 +25,7 @@ namespace CSI_Media_Philip_Mottershesd.Controllers
         // GET: SortedNumbers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.SortedNumbers.ToListAsync());
-        }
-
-        // GET: SortedNumbers/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var sortedNumbers = await _context.SortedNumbers
-                .FirstOrDefaultAsync(m => m.SortedNumbersId == id);
-            if (sortedNumbers == null)
-            {
-                return NotFound();
-            }
-
-            return View(sortedNumbers);
+            return View(await _context.ToListAsync());
         }
 
         // GET: SortedNumbers/Create
@@ -66,21 +48,21 @@ namespace CSI_Media_Philip_Mottershesd.Controllers
         {
             if (ModelState.IsValid)
             {
-                sortedNumbers = sortNumbers(sortedNumbers);
-                _context.Add(sortedNumbers);
-                await _context.SaveChangesAsync();
+                sortedNumbers = SortNumbers(sortedNumbers);
+                await _context.AddAsync(sortedNumbers);
                 return RedirectToAction(nameof(Index));
                 
             }
             return View(sortedNumbers);
         }
 
-        private SortedNumbers sortNumbers(SortedNumbers sortedNumbers) 
+        private SortedNumbers SortNumbers(SortedNumbers sortedNumbers) 
         {
             var watch = new System.Diagnostics.Stopwatch();
+            var numbers = sortedNumbers.Numbers;
+            var direction = sortedNumbers.SortOrder;
+
             watch.Start();
-            String numbers = sortedNumbers.Numbers;
-            int direction = sortedNumbers.SortOrder;
 
             var nums = numbers.Split(",").ToList();
             var resultsList = new List<int>();
@@ -91,6 +73,7 @@ namespace CSI_Media_Philip_Mottershesd.Controllers
                 resultsList.Reverse();
             }
             watch.Stop();
+
             sortedNumbers.Numbers = string.Join(",",resultsList);
             sortedNumbers.TimeTaken = watch.Elapsed;
             return sortedNumbers;
@@ -115,92 +98,6 @@ namespace CSI_Media_Philip_Mottershesd.Controllers
                 }
             }
             return Json(true);
-        }
-
-
-        // GET: SortedNumbers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var sortedNumbers = await _context.SortedNumbers.FindAsync(id);
-            if (sortedNumbers == null)
-            {
-                return NotFound();
-            }
-            return View(sortedNumbers);
-        }
-
-        // POST: SortedNumbers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SortedNumbersId,Numbers,SortOrder,TimeTaken")] SortedNumbers sortedNumbers)
-        {
-            if (id != sortedNumbers.SortedNumbersId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(sortedNumbers);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SortedNumbersExists(sortedNumbers.SortedNumbersId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(sortedNumbers);
-        }
-
-        // GET: SortedNumbers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var sortedNumbers = await _context.SortedNumbers
-                .FirstOrDefaultAsync(m => m.SortedNumbersId == id);
-            if (sortedNumbers == null)
-            {
-                return NotFound();
-            }
-
-            return View(sortedNumbers);
-        }
-
-        // POST: SortedNumbers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var sortedNumbers = await _context.SortedNumbers.FindAsync(id);
-            _context.SortedNumbers.Remove(sortedNumbers);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool SortedNumbersExists(int id)
-        {
-            return _context.SortedNumbers.Any(e => e.SortedNumbersId == id);
         }
     }
 }

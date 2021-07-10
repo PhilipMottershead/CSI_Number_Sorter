@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using CSI_Media_Philip_Mottershesd.Data;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace CSI_Media_Philip_Mottershesd
 {
@@ -26,7 +27,12 @@ namespace CSI_Media_Philip_Mottershesd
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.AddScoped<SortedNumbersRepository>();
 
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
             services.AddDbContext<SortedNumbersContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SortedNumbersContext")));
         }
