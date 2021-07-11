@@ -123,6 +123,9 @@
   <data name="IndexNavLabel" xml:space="preserve">
     <value>Number Sorter</value>
   </data>
+  <data name="PreviousSorts" xml:space="preserve">
+    <value>Sort History</value>
+  </data>
   <data name="ProjectName" xml:space="preserve">
     <value>Number Sorter</value>
   </data>

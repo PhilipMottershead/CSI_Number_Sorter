@@ -6,49 +6,52 @@
     ViewData["Title"] = Localizer["Title"];
 }
 <div class="inner cover text-center">
+    <link rel="stylesheet" href="~/css/site.css" />
 
-    <h1> @Localizer["Headline"]</h1>
+    <h2> @Localizer["Headline"]</h2>
 
     <p>
         <a class="btn btn-primary" asp-action="Create">@Localizer["CreateLable"]</a> <a class="btn btn-primary" asp-action="Export">@Localizer["ExportLabel"]</a>
     </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Localizer["Numbers"]
-                </th>
-                <th>
-                    @Localizer["SortOrder"]
-                </th>
-                <th>
-                    @Localizer["TimeTaken"]
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Numbers)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SortOrder)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TimeTaken)
-                    </td>
+                    <th>
+                        @Localizer["Numbers"]
+                    </th>
+                    <th>
+                        @Localizer["SortOrder"]
+                    </th>
+                    <th>
+                        @Localizer["TimeTaken"]
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    @{
-        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-    }
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Numbers)
+                        </td>
+                        <td>
+                            @Localizer[item.SortOrder.ToString()]
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TimeTaken)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+    </div>
     <a asp-action="Index"
        asp-route-pageNumber="@(Model.PageIndex - 1)"
        class="btn btn-default @prevDisabled">

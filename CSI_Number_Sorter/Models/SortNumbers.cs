@@ -36,7 +36,7 @@ namespace CSI_Number_Sorter.Models
                 resultsList.Reverse();
             }
             watch.Stop();
-
+            Numbers = string.Join(',',resultsList);
             TimeTaken = watch.Elapsed;
         }
 

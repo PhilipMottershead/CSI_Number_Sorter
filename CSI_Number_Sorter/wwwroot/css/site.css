@@ -12,6 +12,13 @@ a {
   color: #0366d6;
 }
 
+.center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;

@@ -27,7 +27,7 @@ namespace CSI_Number_Sorter.Controllers
         public async Task<IActionResult> Index(int? pageNumber)
         {
             int pageSize = 15;
-            return View(await PaginatedList<SortedNumbers>.CreateAsync(_context.SortedNumbers() ,pageNumber ?? 1, pageSize));
+            return View(await PaginatedList<SortedNumbers>.CreateAsync(_context.SortedNumbers().OrderByDescending(n=>n.SortedNumbersId) ,pageNumber ?? 1, pageSize));
         }
 
         public async Task<ActionResult> Export()

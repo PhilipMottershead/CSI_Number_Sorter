@@ -8,6 +8,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>@ViewData["Title"] - @Localizer["ProjectName"] </title>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/cover/">
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
 </head>
@@ -15,23 +19,18 @@
         <header class="masthead mb-auto">
             <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Navbar</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <a class="navbar-brand" href="#">@Localizer["ProjectName"]</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["HomeNavLabel"]</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="SortedNumbers" asp-action="Index">@Localizer["PreviousSorts"]</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="SortedNumbers" asp-action="Create">@Localizer["SortNumberNavLabel"]</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
                             </li>
                         </ul>
                     </div>
@@ -44,13 +43,12 @@
                 </main>
             </div>
 
-            <footer class="mastfoot mt-auto">
+            <footer class="border-top footer text-muted text-center">
                 <div class="container">
                     &copy; @DateTime.Now.Year - @Localizer["ProjectName"]
                 </div>
             </footer>
-        </div>
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/popper.min.js" asp-append-version="true"></script>

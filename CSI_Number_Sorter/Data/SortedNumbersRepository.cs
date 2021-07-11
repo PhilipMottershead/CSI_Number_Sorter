@@ -18,7 +18,7 @@ namespace CSI_Number_Sorter.Data
 
         public async Task<List<SortedNumbers>> ToListAsync()
         {
-            return await _context.SortedNumbers.ToListAsync();
+            return await _context.SortedNumbers.OrderByDescending(s=>s.TimeTaken).ToListAsync();
         }
 
         public async Task AddAsync(SortedNumbers sortedNumbers)
