@@ -1,0 +1,14 @@
+version: '3'
+services:
+  myservice:
+    build:
+      context: /root/apps/CSI_Number_Sorter/CSI_Number_Sorter/
+      dockerfile: Dockerfile
+    image: result/latest
+    environment:
+        - VIRTUAL_HOST=philipmottershead.co.uk, www.philipmottershead.co.uk
+        - LETSENCRYPT_HOST=philipmottershead.co.uk, www.philipmottershead.co.uk
+        - LETSENCRYPT_EMAIL=philip.mottershead@tutanota.com
+        - VIRTUAL_PORT=80
+    network_mode: webproxy
+    container_name: numberSorter
