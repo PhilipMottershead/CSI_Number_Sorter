@@ -51,6 +51,7 @@ namespace CSI_Media_Philip_Mottershesd
                 services.AddDbContext<SortedNumbersContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ProdContext")));
             }
+    
             
         }
 
