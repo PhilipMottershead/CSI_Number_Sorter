@@ -17,12 +17,15 @@ namespace CSI_Media_Philip_Mottershesd
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
+            env = environment;
+
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -37,8 +40,18 @@ namespace CSI_Media_Philip_Mottershesd
                      options.DataAnnotationLocalizerProvider = (type, factory) =>
                          factory.Create(typeof(SharedResource));
                  });
-            services.AddDbContext<SortedNumbersContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("SortedNumbersContext")));
+
+            if (env.IsDevelopment())
+            {
+                services.AddDbContext<SortedNumbersContext>(options =>
+                   options.UseSqlServer(Configuration.GetConnectionString("SortedNumbersContext")));
+            }
+            else
+            {
+                services.AddDbContext<SortedNumbersContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ProdContext")));
+            }
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
