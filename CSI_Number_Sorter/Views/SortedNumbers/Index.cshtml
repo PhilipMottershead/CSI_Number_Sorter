@@ -8,11 +8,19 @@
 <div class="inner cover text-center">
     <link rel="stylesheet" href="~/css/site.css" />
 
+    @if (TempData.ContainsKey("Success") && TempData["Success"].ToString().Equals("true"))
+    {
+        <div class="alert alert-success">
+            <strong>Success!</strong> Numbers sorted sucessfully
+        </div>
+    }
+
     <h2> @Localizer["Headline"]</h2>
 
     <p>
         <a class="btn btn-primary" asp-action="Create">@Localizer["CreateLable"]</a> <a class="btn btn-primary" asp-action="Export">@Localizer["ExportLabel"]</a>
     </p>
+
     <div class="table-responsive">
         <table class="table">
             <thead>
