@@ -51,6 +51,5 @@ To complete this task it required me to make a series of assumptions about the p
 	- To easy input of large amount of number, data was accepted in a text box in the format of a comma separated list. 
 - Storage
 	- To allow easy storage of the sequence it was stored as a string and converted where needed. 
-	- Was unable to store database in app data 
 - UI Design 
 	- To keep the design simple I kept with mostly default Bootstrap 
